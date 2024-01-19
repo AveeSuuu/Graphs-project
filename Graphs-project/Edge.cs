@@ -22,6 +22,14 @@ namespace Graphs_project
       neighbours = new List<Edge>();
     }
 
+    public Edge(int x, int y)
+    {
+      edgeID = nextId;
+      nextId++;
+      this.position = new Point(x, y);
+      neighbours = new List<Edge>();
+    }
+
     public uint EdgeID
     {
       get { return edgeID; }

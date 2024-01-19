@@ -40,6 +40,8 @@
       this.drawingZone.Size = new System.Drawing.Size(500, 500);
       this.drawingZone.TabIndex = 0;
       this.drawingZone.TabStop = false;
+      this.drawingZone.MouseDown += new System.Windows.Forms.MouseEventHandler(this.drawingZone_MouseDown);
+      this.drawingZone.MouseUp += new System.Windows.Forms.MouseEventHandler(this.drawingZone_MouseUp);
       // 
       // GraphsMainForm
       // 

@@ -7,23 +7,32 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Windows.Forms.VisualStyles;
 
 namespace Graphs_project
 {
   public partial class GraphsMainForm : Form
   {
     Bitmap bitmap;
-    Graphics g;
-    Pen verticesPen;
-    Pen edgePen;
+    DrawingKit drawingKit;
+    List<Edge> edges;
 
     public GraphsMainForm()
     {
       InitializeComponent();
-      g = Graphics.FromImage(bitmap);
-      g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality;
-      g.Clear(Color.White);
-      verticesPen = new Pen(Color.Black, 3);
+      bitmap = new Bitmap(500, 500);
+      drawingKit = new DrawingKit(bitmap);
+      edges = new List<Edge>();
+    }
+
+    private void drawingZone_MouseDown(object sender, MouseEventArgs e)
+    {
+      
+    }
+
+    private void drawingZone_MouseUp(object sender, MouseEventArgs e)
+    {
+
     }
   }
 }
