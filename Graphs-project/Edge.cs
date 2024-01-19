@@ -49,5 +49,10 @@ namespace Graphs_project
     {
       neighbours.Add(edge);
     }
+
+    public Point getMiddlePoint(int radius)
+    {
+      return new Point(position.X - radius, position.Y - radius);
+    }
   }
 }

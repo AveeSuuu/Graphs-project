@@ -14,17 +14,22 @@ namespace Graphs_project
     public Pen greenPen;
     public Brush edgesBrush;
     public Brush idBrush;
+    public Size ellipseSize;
+    public readonly int radius = 20;
+    public Font idFont;
 
-    public DrawingKit(Bitmap bitmap)
+    public DrawingKit(Image image)
     {
-      initGraphics(bitmap);
+      initGraphics(image);
       initPens();
       initBrushes();
+      initEllipseSize();
+      initIdFont();
     }
 
-    private void initGraphics(Bitmap bitmap)
+    private void initGraphics(Image image)
     {
-      graphics = Graphics.FromImage(bitmap);
+      graphics = Graphics.FromImage(image);
       graphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality;
       graphics.Clear(Color.White);
     }
@@ -39,6 +44,55 @@ namespace Graphs_project
     {
       edgesBrush = new SolidBrush(Color.White);
       idBrush = new SolidBrush(Color.Black);
+    }
+
+    private void initEllipseSize()
+    {
+      ellipseSize = new Size(radius * 2, radius * 2);
+    }
+
+    private void initIdFont()
+    {
+      idFont = new Font("Microsoft Sans Serif", radius / (float)1.25);
+    }
+
+    public void draw(List<Edge> edges)
+    {
+      graphics.Clear(Color.White);
+      drawConnections(edges);
+      drawEdges(edges);
+    }
+
+    private void drawConnections(List<Edge> edges)
+    {
+      foreach (Edge edge in edges)
+      {
+        foreach (Edge neigbour in edge.Neighbours)
+        {
+          graphics.DrawLine(blackPen, edge.Position, neigbour.Position);
+        }
+      }
+    }
+
+    private void drawEdges(List<Edge> edges)
+    {
+      foreach (Edge edge in edges)
+      {
+        Rectangle rectangle = new Rectangle(
+          edge.getMiddlePoint(radius),
+          ellipseSize
+          );
+
+        graphics.FillEllipse(edgesBrush, rectangle);
+        graphics.DrawEllipse(blackPen, rectangle);
+
+        graphics.DrawString(
+          edge.EdgeID.ToString(),
+          idFont,
+          idBrush,
+          edge.getMiddlePoint(radius / 2)
+          );
+      }
     }
   }
 }

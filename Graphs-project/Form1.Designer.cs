@@ -35,7 +35,7 @@
       // drawingZone
       // 
       this.drawingZone.Anchor = System.Windows.Forms.AnchorStyles.Right;
-      this.drawingZone.Location = new System.Drawing.Point(272, 19);
+      this.drawingZone.Location = new System.Drawing.Point(12, 12);
       this.drawingZone.Name = "drawingZone";
       this.drawingZone.Size = new System.Drawing.Size(500, 500);
       this.drawingZone.TabIndex = 0;

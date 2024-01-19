@@ -21,13 +21,19 @@ namespace Graphs_project
     {
       InitializeComponent();
       bitmap = new Bitmap(500, 500);
-      drawingKit = new DrawingKit(bitmap);
+      drawingZone.Image = bitmap;
+      drawingKit = new DrawingKit(drawingZone.Image);
       edges = new List<Edge>();
     }
 
     private void drawingZone_MouseDown(object sender, MouseEventArgs e)
     {
-      
+      if (e.Button == MouseButtons.Left)
+      {
+        edges.Add(new Edge(e.X, e.Y));
+        drawingKit.draw(edges);
+        drawingZone.Refresh();
+      }
     }
 
     private void drawingZone_MouseUp(object sender, MouseEventArgs e)
