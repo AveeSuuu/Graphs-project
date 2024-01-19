@@ -78,10 +78,10 @@ namespace Graphs_project
 
     private bool checkColision(Point mousePosition)
     {
-      if (mousePosition.X < 20 ||
-         mousePosition.X > 480 ||
-         mousePosition.Y < 20 ||
-         mousePosition.Y > 480
+      if (mousePosition.X < 30 ||
+         mousePosition.X > 470 ||
+         mousePosition.Y < 30 ||
+         mousePosition.Y > 470
         ) return false;
 
       foreach (Edge edge in edges)

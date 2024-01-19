@@ -12,14 +12,14 @@ namespace Graphs_project
     private static uint nextId = 1;
     private uint edgeID;
     private Point position;
-    private List<Edge> neighbours;
+    private HashSet<Edge> neighbours;
 
     public Edge(Point position)
     {
       edgeID = nextId;
       nextId++;
       this.position = position;
-      neighbours = new List<Edge>();
+      neighbours = new HashSet<Edge>();
     }
 
     public Edge(int x, int y)
@@ -27,7 +27,7 @@ namespace Graphs_project
       edgeID = nextId;
       nextId++;
       this.position = new Point(x, y);
-      neighbours = new List<Edge>();
+      neighbours = new HashSet<Edge>();
     }
 
     public uint EdgeID
@@ -40,7 +40,7 @@ namespace Graphs_project
       get { return position; }
     }
 
-    public List<Edge> Neighbours
+    public HashSet<Edge> Neighbours
     {
       get { return neighbours; }
     }
