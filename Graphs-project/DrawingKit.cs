@@ -94,5 +94,10 @@ namespace Graphs_project
           );
       }
     }
+
+    public void clear()
+    {
+      graphics.Clear(Color.White);
+    }
   }
 }

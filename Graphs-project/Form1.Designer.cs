@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
       this.drawingZone = new System.Windows.Forms.PictureBox();
+      this.clearButton = new System.Windows.Forms.Button();
       ((System.ComponentModel.ISupportInitialize)(this.drawingZone)).BeginInit();
       this.SuspendLayout();
       // 
@@ -43,12 +44,23 @@
       this.drawingZone.MouseDown += new System.Windows.Forms.MouseEventHandler(this.drawingZone_MouseDown);
       this.drawingZone.MouseUp += new System.Windows.Forms.MouseEventHandler(this.drawingZone_MouseUp);
       // 
+      // clearButton
+      // 
+      this.clearButton.Location = new System.Drawing.Point(527, 489);
+      this.clearButton.Name = "clearButton";
+      this.clearButton.Size = new System.Drawing.Size(75, 23);
+      this.clearButton.TabIndex = 1;
+      this.clearButton.Text = "Clear";
+      this.clearButton.UseVisualStyleBackColor = true;
+      this.clearButton.Click += new System.EventHandler(this.clearButton_Click);
+      // 
       // GraphsMainForm
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
       this.BackColor = System.Drawing.SystemColors.ActiveCaption;
       this.ClientSize = new System.Drawing.Size(784, 531);
+      this.Controls.Add(this.clearButton);
       this.Controls.Add(this.drawingZone);
       this.Cursor = System.Windows.Forms.Cursors.Arrow;
       this.MaximizeBox = false;
@@ -66,6 +78,7 @@
         #endregion
 
         private System.Windows.Forms.PictureBox drawingZone;
+        private System.Windows.Forms.Button clearButton;
     }
 }
 

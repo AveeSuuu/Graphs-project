@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -53,6 +54,11 @@ namespace Graphs_project
     public Point getMiddlePoint(int radius)
     {
       return new Point(position.X - radius, position.Y - radius);
+    }
+
+    public static void resetIdCounter()
+    {
+      nextId = 1;
     }
   }
 }

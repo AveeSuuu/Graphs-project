@@ -63,7 +63,7 @@ namespace Graphs_project
 
     private Edge getNearestEdge(Point position)
     {
-      foreach(Edge edge in edges)
+      foreach (Edge edge in edges)
       {
         if (distance(position, edge.Position) < drawingKit.radius) return edge;
       }
@@ -95,6 +95,14 @@ namespace Graphs_project
     private int distance(Point p1, Point p2)
     {
       return (int)Math.Sqrt(Math.Pow(p2.X - p1.X, 2) + (int)Math.Pow(p2.Y - p1.Y, 2));
+    }
+
+    private void clearButton_Click(object sender, EventArgs e)
+    {
+      drawingKit.clear();
+      edges.Clear();
+      Edge.resetIdCounter();
+      drawingZone.Refresh();
     }
   }
 }
