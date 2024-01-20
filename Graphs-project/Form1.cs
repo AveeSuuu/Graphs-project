@@ -34,6 +34,7 @@ namespace Graphs_project
       {
         if (!checkColision(e.Location)) return;
 
+        searchingStepsTrachbar.Maximum = Convert.ToInt32(Edge.EdgeIdCounter);
         edges.Add(new Edge(e.X, e.Y));
         drawingKit.draw(edges);
         drawingZone.Refresh();

@@ -31,6 +31,11 @@ namespace Graphs_project
       neighbours = new HashSet<Edge>();
     }
 
+    public static uint EdgeIdCounter
+    {
+      get { return nextId; }
+    }
+
     public uint EdgeID
     {
       get { return edgeID; }
