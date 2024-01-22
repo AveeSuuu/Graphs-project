@@ -21,12 +21,12 @@ namespace Graphs_project
       Neighbours = new HashSet<Node>();
     }
 
-    public Node(Point position): base()
+    public Node(Point position) : this()
     {
       Position = position;
     }
 
-    public Node(int x, int y): base()
+    public Node(int x, int y) : this()
     {
       Position = new Point(x, y);
     }

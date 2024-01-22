@@ -14,7 +14,7 @@ namespace Graphs_project
     private Graphics graphics;
     private Pen blackPen;
     private Pen greenPen;
-    private Brush edgesBrush;
+    private Brush nodeBrush;
     private Brush idBrush;
     private Size ellipseSize;
     private Font idFont;
@@ -27,6 +27,13 @@ namespace Graphs_project
       initBrushes();
       initEllipseSize();
       initIdFont();
+    }
+
+    public void draw(Graph graph)
+    {
+      graphics.Clear(Color.White);
+      drawConnections(graph.nodes);
+      drawNodes(graph.nodes);
     }
 
     private void initGraphics(Image image)
@@ -44,7 +51,7 @@ namespace Graphs_project
 
     private void initBrushes()
     {
-      edgesBrush = new SolidBrush(Color.White);
+      nodeBrush = new SolidBrush(Color.White);
       idBrush = new SolidBrush(Color.Black);
     }
 
@@ -58,26 +65,18 @@ namespace Graphs_project
       idFont = new Font("Microsoft Sans Serif", Radius / (float)1.25);
     }
 
-    public void draw(List<Node> edges)
+    private void drawConnections(List<Node> nodes)
     {
-      graphics.Clear(Color.White);
-      drawConnections(edges);
-      drawEdges(edges);
-    }
-    //DFS(start, target, new Hashset<Edges>)
-
-    private void drawConnections(List<Node> edges)
-    {
-      foreach (Node edge in edges)
+      foreach (Node node in nodes)
       {
-        foreach (Node neigbour in edge.Neighbours)
+        foreach (Node neighbour in node.Neighbours)
         {
-          graphics.DrawLine(blackPen, edge.Position, neigbour.Position);
+          graphics.DrawLine(blackPen, node.Position, neighbour.Position);
         }
       }
     }
 
-    private void drawEdges(List<Node> nodes)
+    private void drawNodes(List<Node> nodes)
     {
       foreach (Node node in nodes)
       {
@@ -86,7 +85,7 @@ namespace Graphs_project
           ellipseSize
           );
 
-        graphics.FillEllipse(edgesBrush, rectangle);
+        graphics.FillEllipse(nodeBrush, rectangle);
         graphics.DrawEllipse(blackPen, rectangle);
 
         graphics.DrawString(
