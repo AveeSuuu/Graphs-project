@@ -4,23 +4,25 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace Graphs_project
 {
   internal class DrawingKit
   {
-    public Graphics graphics;
-    public Pen blackPen;
-    public Pen greenPen;
-    public Brush edgesBrush;
-    public Brush idBrush;
-    public Size ellipseSize;
-    public readonly int radius = 20;
-    public Font idFont;
+    public int Radius { get; }
+    private Graphics graphics;
+    private Pen blackPen;
+    private Pen greenPen;
+    private Brush edgesBrush;
+    private Brush idBrush;
+    private Size ellipseSize;
+    private Font idFont;
 
-    public DrawingKit(Image image)
+    public DrawingKit(PictureBox picture)
     {
-      initGraphics(image);
+      Radius = 20;
+      initGraphics(picture.Image);
       initPens();
       initBrushes();
       initEllipseSize();
@@ -48,19 +50,19 @@ namespace Graphs_project
 
     private void initEllipseSize()
     {
-      ellipseSize = new Size(radius * 2, radius * 2);
+      ellipseSize = new Size(Radius * 2, Radius * 2);
     }
 
     private void initIdFont()
     {
-      idFont = new Font("Microsoft Sans Serif", radius / (float)1.25);
+      idFont = new Font("Microsoft Sans Serif", Radius / (float)1.25);
     }
 
     public void draw(List<Node> edges)
     {
       graphics.Clear(Color.White);
-      drawConnections(edges); //a to jest krawędź
-      drawEdges(edges); //to jest kurwa połaczenie NODE Z ANGIELSKIEGo
+      drawConnections(edges);
+      drawEdges(edges);
     }
     //DFS(start, target, new Hashset<Edges>)
 
@@ -75,12 +77,12 @@ namespace Graphs_project
       }
     }
 
-    private void drawEdges(List<Node> edges)
+    private void drawEdges(List<Node> nodes)
     {
-      foreach (Node edge in edges)
+      foreach (Node node in nodes)
       {
         Rectangle rectangle = new Rectangle(
-          edge.getMiddlePoint(radius),
+          node.getMiddlePoint(Radius),
           ellipseSize
           );
 
@@ -88,10 +90,10 @@ namespace Graphs_project
         graphics.DrawEllipse(blackPen, rectangle);
 
         graphics.DrawString(
-          edge.EdgeID.ToString(),
+          node.NodeID.ToString(),
           idFont,
           idBrush,
-          edge.getMiddlePoint(radius / 2)
+          node.getMiddlePoint(Radius / 2)
           );
       }
     }

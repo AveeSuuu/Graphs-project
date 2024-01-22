@@ -13,18 +13,15 @@ namespace Graphs_project
 {
   public partial class GraphsMainForm : Form
   {
-    Bitmap bitmap;
+    Graph graph;
     DrawingKit drawingKit;
-    List<Node> edges;
     Point mousePosition;
 
     public GraphsMainForm()
     {
       InitializeComponent();
-      bitmap = new Bitmap(500, 500);
-      drawingZone.Image = bitmap;
-      drawingKit = new DrawingKit(drawingZone.Image);
-      edges = new List<Node>();
+      graph = new Graph(drawingZone);
+      drawingKit = new DrawingKit(drawingZone);
       mousePosition = new Point();
     }
 
@@ -34,8 +31,8 @@ namespace Graphs_project
       {
         if (!checkColision(e.Location)) return;
 
-        edges.Add(new Node(e.X, e.Y));
-        drawingKit.draw(edges);
+        graph.nodes.Add(new Node(e.X, e.Y));
+        drawingKit.draw(graph.nodes);
         drawingZone.Refresh();
       }
 
@@ -50,31 +47,31 @@ namespace Graphs_project
     {
       if (e.Button == MouseButtons.Right)
       {
-        Node firstEdge = getNearestEdge(mousePosition);
-        Node targetEdge = getNearestEdge(e.Location);
+        Node firstEdge = getNearestNode(mousePosition);
+        Node targetEdge = getNearestNode(e.Location);
 
         if (edgeNotFound(firstEdge) || edgeNotFound(targetEdge)) return;
 
         firstEdge.Neighbours.Add(targetEdge);
         targetEdge.Neighbours.Add(firstEdge);
-        drawingKit.draw(edges);
+        drawingKit.draw(graph.nodes);
         drawingZone.Refresh();
       }
     }
 
-    private Node getNearestEdge(Point position)
+    private Node getNearestNode(Point position)
     {
-      foreach (Node edge in edges)
+      foreach (Node node in graph.nodes)
       {
-        if (distance(position, edge.Position) < drawingKit.radius) return edge;
+        if (distance(position, node.Position) < drawingKit.Radius) return node;
       }
 
       return null;
     }
 
-    private bool edgeNotFound(Node edge)
+    private bool edgeNotFound(Node node)
     {
-      return edge == null ? true : false;
+      return node == null ? true : false;
     }
 
     private bool checkColision(Point mousePosition)
@@ -85,9 +82,9 @@ namespace Graphs_project
          mousePosition.Y > 470
         ) return false;
 
-      foreach (Node edge in edges)
+      foreach (Node node in graph.nodes)
       {
-        if (distance(mousePosition, edge.Position) < drawingKit.radius * 2.5) return false;
+        if (distance(mousePosition, node.Position) < drawingKit.Radius * 2.5) return false;
       }
 
       return true;
@@ -101,7 +98,7 @@ namespace Graphs_project
     private void clearButton_Click(object sender, EventArgs e)
     {
       drawingKit.clear();
-      edges.Clear();
+      graph.nodes.Clear();
       Node.resetIdCounter();
       drawingZone.Refresh();
     }

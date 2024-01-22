@@ -10,14 +10,14 @@ namespace Graphs_project
 {
   internal class Node
   {
-    private static uint edgeIDCounter = 1;
-    public uint edgeID { get; }
+    private static uint nodeIdCounter = 1;
+    public uint NodeID { get; }
     public Point Position { get; }
     public HashSet<Node> Neighbours { get; }
 
     private Node()
     {
-      edgeID = edgeIDCounter++;
+      NodeID = nodeIdCounter++;
       Neighbours = new HashSet<Node>();
     }
 
@@ -43,7 +43,7 @@ namespace Graphs_project
 
     public static void resetIdCounter()
     {
-      edgeIDCounter = 1;
+      nodeIdCounter = 1;
     }
   }
 }
