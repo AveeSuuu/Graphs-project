@@ -43,10 +43,10 @@ namespace Graphs_project
     {
       if (!(e.Button == MouseButtons.Left)) return;
 
-      Node firstEdge = graphOperations.getNearestNode(mousePosition);
-      Node targetEdge = graphOperations.getNearestNode(e.Location);
+      Node firstNode = graphOperations.getNearestNode(mousePosition);
+      Node secondNode = graphOperations.getNearestNode(e.Location);
 
-      graphOperations.connect(firstEdge, targetEdge);
+      graphOperations.connect(firstNode, secondNode);
 
       drawingKit.draw(graph);
       drawingZone.Refresh();
@@ -58,6 +58,11 @@ namespace Graphs_project
       graph.nodes.Clear();
       Node.resetIdCounter();
       drawingZone.Refresh();
+    }
+
+    private void StartButton_Click(object sender, EventArgs e)
+    {
+
     }
   }
 }

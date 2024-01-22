@@ -62,13 +62,12 @@ namespace Graphs_project
 
     private bool pointOutOfZone(Point point)
     {
-      if (point.X < 30 ||
-         point.X > 470 ||
-         point.Y < 30 ||
-         point.Y > 470
-        ) return true;
-
-      return false;
+      return
+        point.X < 30  ||
+        point.X > 470 ||
+        point.Y < 30  ||
+        point.Y > 470
+      ? true : false;
     }
 
     private int distance(Point p1, Point p2)
