@@ -29,32 +29,27 @@ namespace Graphs_project
 
     private void drawingZone_MouseDown(object sender, MouseEventArgs e)
     {
-      if (e.Button == MouseButtons.Left)
-      {
-        graphOperations.addNode(e.Location);
-        drawingKit.draw(graph);
-        drawingZone.Refresh();
-      }
+      if (!(e.Button == MouseButtons.Left)) return;
 
-      if (e.Button == MouseButtons.Right)
+      mousePosition.X = e.X; mousePosition.Y = e.Y;
+
+      if (graphOperations.getNearestNode(mousePosition) == null)
       {
-        mousePosition.X = e.X;
-        mousePosition.Y = e.Y;
+        graphOperations.addNode(mousePosition);
       }
     }
 
     private void drawingZone_MouseUp(object sender, MouseEventArgs e)
     {
-      if (e.Button == MouseButtons.Right)
-      {
-        Node firstEdge = graphOperations.getNearestNode(mousePosition);
-        Node targetEdge = graphOperations.getNearestNode(e.Location);
+      if (!(e.Button == MouseButtons.Left)) return;
 
-        graphOperations.connect(firstEdge, targetEdge);
+      Node firstEdge = graphOperations.getNearestNode(mousePosition);
+      Node targetEdge = graphOperations.getNearestNode(e.Location);
 
-        drawingKit.draw(graph);
-        drawingZone.Refresh();
-      }
+      graphOperations.connect(firstEdge, targetEdge);
+
+      drawingKit.draw(graph);
+      drawingZone.Refresh();
     }
 
     private void clearButton_Click(object sender, EventArgs e)
