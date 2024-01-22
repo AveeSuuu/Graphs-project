@@ -15,7 +15,7 @@ namespace Graphs_project
   {
     Bitmap bitmap;
     DrawingKit drawingKit;
-    List<Edge> edges;
+    List<Node> edges;
     Point mousePosition;
 
     public GraphsMainForm()
@@ -24,7 +24,7 @@ namespace Graphs_project
       bitmap = new Bitmap(500, 500);
       drawingZone.Image = bitmap;
       drawingKit = new DrawingKit(drawingZone.Image);
-      edges = new List<Edge>();
+      edges = new List<Node>();
       mousePosition = new Point();
     }
 
@@ -34,8 +34,7 @@ namespace Graphs_project
       {
         if (!checkColision(e.Location)) return;
 
-        searchingStepsTrachbar.Maximum = Convert.ToInt32(Edge.EdgeIdCounter);
-        edges.Add(new Edge(e.X, e.Y));
+        edges.Add(new Node(e.X, e.Y));
         drawingKit.draw(edges);
         drawingZone.Refresh();
       }
@@ -51,8 +50,9 @@ namespace Graphs_project
     {
       if (e.Button == MouseButtons.Right)
       {
-        Edge firstEdge = getNearestEdge(mousePosition);
-        Edge targetEdge = getNearestEdge(e.Location);
+        Node firstEdge = getNearestEdge(mousePosition);
+        Node targetEdge = getNearestEdge(e.Location);
+
         if (edgeNotFound(firstEdge) || edgeNotFound(targetEdge)) return;
 
         firstEdge.Neighbours.Add(targetEdge);
@@ -62,9 +62,9 @@ namespace Graphs_project
       }
     }
 
-    private Edge getNearestEdge(Point position)
+    private Node getNearestEdge(Point position)
     {
-      foreach (Edge edge in edges)
+      foreach (Node edge in edges)
       {
         if (distance(position, edge.Position) < drawingKit.radius) return edge;
       }
@@ -72,7 +72,7 @@ namespace Graphs_project
       return null;
     }
 
-    private bool edgeNotFound(Edge edge)
+    private bool edgeNotFound(Node edge)
     {
       return edge == null ? true : false;
     }
@@ -85,7 +85,7 @@ namespace Graphs_project
          mousePosition.Y > 470
         ) return false;
 
-      foreach (Edge edge in edges)
+      foreach (Node edge in edges)
       {
         if (distance(mousePosition, edge.Position) < drawingKit.radius * 2.5) return false;
       }
@@ -102,7 +102,7 @@ namespace Graphs_project
     {
       drawingKit.clear();
       edges.Clear();
-      Edge.resetIdCounter();
+      Node.resetIdCounter();
       drawingZone.Refresh();
     }
   }

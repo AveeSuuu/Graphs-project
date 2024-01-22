@@ -56,27 +56,28 @@ namespace Graphs_project
       idFont = new Font("Microsoft Sans Serif", radius / (float)1.25);
     }
 
-    public void draw(List<Edge> edges)
+    public void draw(List<Node> edges)
     {
       graphics.Clear(Color.White);
-      drawConnections(edges);
-      drawEdges(edges);
+      drawConnections(edges); //a to jest krawędź
+      drawEdges(edges); //to jest kurwa połaczenie NODE Z ANGIELSKIEGo
     }
+    //DFS(start, target, new Hashset<Edges>)
 
-    private void drawConnections(List<Edge> edges)
+    private void drawConnections(List<Node> edges)
     {
-      foreach (Edge edge in edges)
+      foreach (Node edge in edges)
       {
-        foreach (Edge neigbour in edge.Neighbours)
+        foreach (Node neigbour in edge.Neighbours)
         {
           graphics.DrawLine(blackPen, edge.Position, neigbour.Position);
         }
       }
     }
 
-    private void drawEdges(List<Edge> edges)
+    private void drawEdges(List<Node> edges)
     {
-      foreach (Edge edge in edges)
+      foreach (Node edge in edges)
       {
         Rectangle rectangle = new Rectangle(
           edge.getMiddlePoint(radius),
