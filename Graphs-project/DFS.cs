@@ -19,14 +19,13 @@ namespace Graphs_project
 
     private void dfsSearch(Node node, HashSet<Node> visitedNodes) 
     {
-      
-
       if (node == null || visitedNodes.Contains(node)) return;
 
       visitedNodes.Add(node);
 
       foreach(Node neighbour in node.Neighbours)
       {
+        Steps.Add(new KeyValuePair<Node, Node>(node, neighbour));
         dfsSearch(neighbour, visitedNodes);
       }
     }
