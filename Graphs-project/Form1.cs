@@ -71,7 +71,17 @@ namespace Graphs_project
 
     private void StartButton_Click(object sender, EventArgs e)
     {
+      if (!BFSradioButton.Checked && !DFSradioButton.Checked) return;
 
+      if(BFSradioButton.Checked)
+      {
+        Algorithm algorithm = new BFS();
+      }
+
+      if(DFSradioButton.Checked)
+      {
+        Algorithm algorithm = new DFS();
+      }
     }
   }
 }
