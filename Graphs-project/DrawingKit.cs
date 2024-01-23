@@ -14,7 +14,8 @@ namespace Graphs_project
     private Graphics graphics;
     private Pen blackPen;
     private Pen greenPen;
-    private Brush nodeBrush;
+    private Brush whiteBrush;
+    private Brush greenBrush;
     private Brush idBrush;
     private Size ellipseSize;
     private Font idFont;
@@ -32,8 +33,8 @@ namespace Graphs_project
     public void draw(Graph graph)
     {
       graphics.Clear(Color.White);
-      drawConnections(graph.nodes);
-      drawNodes(graph.nodes);
+      drawConnections(graph.Nodes);
+      drawNodes(graph.Nodes);
     }
 
     private void initGraphics(Image image)
@@ -51,7 +52,8 @@ namespace Graphs_project
 
     private void initBrushes()
     {
-      nodeBrush = new SolidBrush(Color.White);
+      whiteBrush = new SolidBrush(Color.White);
+      greenBrush = new SolidBrush(Color.Green);
       idBrush = new SolidBrush(Color.Black);
     }
 
@@ -85,7 +87,15 @@ namespace Graphs_project
           ellipseSize
           );
 
-        graphics.FillEllipse(nodeBrush, rectangle);
+        if (node.StartFlag)
+        {
+          graphics.FillEllipse(greenBrush, rectangle);
+        }
+        else
+        {
+          graphics.FillEllipse(whiteBrush, rectangle);
+        }
+
         graphics.DrawEllipse(blackPen, rectangle);
 
         graphics.DrawString(

@@ -29,24 +29,33 @@ namespace Graphs_project
 
     private void drawingZone_MouseDown(object sender, MouseEventArgs e)
     {
-      if (!(e.Button == MouseButtons.Left)) return;
-
-      mousePosition.X = e.X; mousePosition.Y = e.Y;
-
-      if (graphOperations.getNearestNode(mousePosition) == null)
+      if (e.Button == MouseButtons.Left)
       {
-        graphOperations.addNode(mousePosition);
+        mousePosition.X = e.X; mousePosition.Y = e.Y;
+
+        if (graphOperations.getNearestNode(mousePosition) == null)
+        {
+          graphOperations.addNode(mousePosition);
+        }
+      }
+
+      if (e.Button == MouseButtons.Right)
+      {
+        Node node = graphOperations.getNearestNode(e.Location);
+        if (node == null) return;
+
+        graphOperations.markNodeAsStart(node);
       }
     }
 
     private void drawingZone_MouseUp(object sender, MouseEventArgs e)
     {
-      if (!(e.Button == MouseButtons.Left)) return;
-
-      Node firstNode = graphOperations.getNearestNode(mousePosition);
-      Node secondNode = graphOperations.getNearestNode(e.Location);
-
-      graphOperations.connect(firstNode, secondNode);
+      if (e.Button == MouseButtons.Left)
+      {
+        Node firstNode = graphOperations.getNearestNode(mousePosition);
+        Node secondNode = graphOperations.getNearestNode(e.Location);
+        graphOperations.connect(firstNode, secondNode);
+      }
 
       drawingKit.draw(graph);
       drawingZone.Refresh();
@@ -55,7 +64,7 @@ namespace Graphs_project
     private void clearButton_Click(object sender, EventArgs e)
     {
       drawingKit.clear();
-      graph.nodes.Clear();
+      graph.Nodes.Clear();
       Node.resetIdCounter();
       drawingZone.Refresh();
     }

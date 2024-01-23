@@ -14,6 +14,7 @@ namespace Graphs_project
     public uint NodeID { get; }
     public Point Position { get; }
     public HashSet<Node> Neighbours { get; }
+    public bool StartFlag { get; set; }
 
     private Node()
     {
@@ -31,9 +32,9 @@ namespace Graphs_project
       Position = new Point(x, y);
     }
 
-    public void addNeigbour(Node edge)
+    public void addNeigbour(Node node)
     {
-      Neighbours.Add(edge);
+      Neighbours.Add(node);
     }
 
     public Point getMiddlePoint(int radius)

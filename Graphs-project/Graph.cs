@@ -11,12 +11,12 @@ namespace Graphs_project
   internal class Graph
   {
     private Bitmap bitmap;
-    public List<Node> nodes { get; }
+    public List<Node> Nodes { get; }
 
     public Graph(PictureBox picture)
     {
       bitmap = new Bitmap(500, 500);
-      nodes = new List<Node>();
+      Nodes = new List<Node>();
       picture.Image = bitmap;
     }
   }

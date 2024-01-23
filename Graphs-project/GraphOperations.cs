@@ -4,6 +4,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms.VisualStyles;
 
 namespace Graphs_project
 {
@@ -23,7 +24,7 @@ namespace Graphs_project
       if (nodesNearPoint(point)) return;
       if (pointOutOfZone(point)) return;
 
-      graph.nodes.Add(new Node(point));
+      graph.Nodes.Add(new Node(point));
     }
 
     public void connect(Node firstNode, Node secondNode)
@@ -37,12 +38,26 @@ namespace Graphs_project
 
     public Node getNearestNode(Point point)
     {
-      foreach (Node node in graph.nodes)
+      foreach (Node node in graph.Nodes)
       {
         if (distance(point, node.Position) < radius) return node;
       }
 
       return null;
+    }
+
+    public void markNodeAsStart(Node startNode)
+    {
+      foreach(Node node in graph.Nodes)
+      {
+        if (node.StartFlag)
+        {
+          node.StartFlag = false;
+          break;
+        }
+      }
+
+      startNode.StartFlag = true;
     }
 
     private bool nodeNotFound(Node node)
@@ -52,7 +67,7 @@ namespace Graphs_project
 
     private bool nodesNearPoint(Point point)
     {
-      foreach (Node node in graph.nodes)
+      foreach (Node node in graph.Nodes)
       {
         if (distance(point, node.Position) < radius * 2.5) return true;
       }
