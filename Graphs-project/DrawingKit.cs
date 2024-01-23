@@ -111,5 +111,34 @@ namespace Graphs_project
     {
       graphics.Clear(Color.White);
     }
+
+    public void drawAlgorithm(Queue<Node> algorithmSequence, Graph graph)
+    {
+      {
+        Queue<Node> currentSequence = new Queue<Node>();
+
+        while (algorithmSequence.Count > 0)
+        {
+          currentSequence.Enqueue(algorithmSequence.Dequeue());
+          drawConnections(graph.Nodes);
+          drawAlgorithmSequence(currentSequence);
+          drawNodes(graph.Nodes);
+        }
+      }
+    }
+
+    private void drawAlgorithmSequence(Queue<Node> algorithmSequence)
+    {
+      if (algorithmSequence.Count == 0) return;
+
+      Node startNode = algorithmSequence.Dequeue();
+
+      while(algorithmSequence.Count > 0)
+      {
+        Node targetNode = algorithmSequence.Dequeue();
+        graphics.DrawLine(greenPen, startNode.Position, targetNode.Position);
+        startNode = targetNode;
+      }
+    }
   }
 }

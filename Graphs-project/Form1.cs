@@ -71,17 +71,22 @@ namespace Graphs_project
 
     private void StartButton_Click(object sender, EventArgs e)
     {
-      if (!BFSradioButton.Checked && !DFSradioButton.Checked) return;
-
-      if(BFSradioButton.Checked)
+      if (!BFSradioButton.Checked && !DFSradioButton.Checked)
       {
-        Algorithm algorithm = new BFS();
+        MessageBox.Show("No algorithm selected!");
+        return;
       }
 
-      if(DFSradioButton.Checked)
-      {
-        Algorithm algorithm = new DFS();
-      }
+      Algorithm algorithm = GetAlgorithm();
+
+      drawingKit.drawAlgorithm(algorithm.Steps, graph);
+    }
+
+    internal Algorithm GetAlgorithm()
+    {
+      if (BFSradioButton.Checked) return new BFS(graph);
+      if (DFSradioButton.Checked) return new DFS(graph);
+      return null;
     }
   }
 }

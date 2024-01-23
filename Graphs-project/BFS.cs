@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace Graphs_project
 {
-  internal class BFS : Algorithm, ISearchable
+  internal class BFS : Algorithm
   {
     public BFS(Graph graph) : base(graph) { }
 
-    public void search()
+    public override void search()
     {
 
     }

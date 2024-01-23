@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Graphs_project
 {
-  internal abstract class Algorithm
+  abstract class Algorithm
   {
     protected Graph graph;
     public Queue<Node> Steps { get; }
@@ -16,5 +16,7 @@ namespace Graphs_project
       this.graph = graph;
       Steps = new Queue<Node>();
     }
+
+    public abstract void search();
   }
 }
