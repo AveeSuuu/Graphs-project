@@ -24,19 +24,17 @@ namespace Graphs_project
       queue.Enqueue(startNode);
       visitedNodes.Add(startNode);
 
-      while(queue.Count > 0 )
+      while (queue.Count > 0)
       {
         Node current = queue.Dequeue();
-        Steps.Enqueue(current);
 
-        foreach(Node neighbour in current.Neighbours)
+        foreach (Node neighbour in current.Neighbours)
         {
           if (!visitedNodes.Contains(neighbour))
           {
             queue.Enqueue(neighbour);
             visitedNodes.Add(neighbour);
-            Steps.Enqueue(neighbour);
-
+            Steps.Add(new KeyValuePair<Node, Node>(current, neighbour));
           }
         }
       }

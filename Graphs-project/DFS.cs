@@ -19,7 +19,7 @@ namespace Graphs_project
 
     private void dfsSearch(Node node, HashSet<Node> visitedNodes) 
     {
-      Steps.Enqueue(node);
+      
 
       if (node == null || visitedNodes.Contains(node)) return;
 

@@ -113,41 +113,26 @@ namespace Graphs_project
       graphics.Clear(Color.White);
     }
 
-    public void drawAlgorithm(Queue<Node> algorithmSequence, Graph graph, PictureBox picture)
+    public void drawAlgorithm(List<KeyValuePair<Node, Node>> sequence, Graph graph, PictureBox picture)
     {
-      {
-        List<Node> currentSequence = new List<Node>();
+      List<KeyValuePair<Node, Node>> steps = new List<KeyValuePair<Node, Node>>();
 
-        while (algorithmSequence.Count > 0)
-        {
-          currentSequence.Add(algorithmSequence.Dequeue());
-          drawConnections(graph.Nodes);
-          drawAlgorithmSequence(currentSequence);
-          drawNodes(graph.Nodes);
-          Thread.Sleep(250);
-          picture.Refresh();
-        }
+      foreach (KeyValuePair<Node, Node> pair in sequence)
+      {
+        steps.Add(pair);
+        drawConnections(graph.Nodes);
+        drawAlgorithmSequence(steps);
+        drawNodes(graph.Nodes);
+        Thread.Sleep(250);
+        picture.Refresh();
       }
     }
 
-    private void drawAlgorithmSequence(List<Node> sequence)
+    private void drawAlgorithmSequence(List<KeyValuePair<Node, Node>> steps)
     {
-      if (sequence.Count < 2) return;
-
-      int rangeLimit = sequence.Count - 1;
-
-      int i = 0;
-      while (i < rangeLimit)
+      foreach(KeyValuePair<Node, Node> pair in steps)
       {
-        Node startNode = sequence[i];
-        Node targetNode = sequence[i+1];
-
-        if (startNode.Neighbours.Contains(targetNode))
-        {
-          graphics.DrawLine(greenPen, startNode.Position, targetNode.Position);
-        }
-
-        i++;
+        graphics.DrawLine(greenPen, pair.Key.Position, pair.Value.Position);
       }
     }
   }

@@ -9,12 +9,12 @@ namespace Graphs_project
   abstract class Algorithm
   {
     protected Graph graph;
-    public Queue<Node> Steps { get; }
+    public List<KeyValuePair<Node, Node>> Steps { get; }
 
     protected Algorithm(Graph graph)
     {
       this.graph = graph;
-      Steps = new Queue<Node>();
+      Steps = new List<KeyValuePair<Node, Node>>();
     }
 
     public abstract void search();
