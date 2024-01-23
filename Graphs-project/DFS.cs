@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms.VisualStyles;
 
 namespace Graphs_project
 {
@@ -12,7 +13,22 @@ namespace Graphs_project
 
     public override void search()
     {
+      Node start = GraphOperations.getStartNode(graph);
+      dfsSearch(start, new HashSet<Node>());
+    }
 
+    private void dfsSearch(Node node, HashSet<Node> visitedNodes) 
+    {
+      Steps.Enqueue(node);
+
+      if (node == null || visitedNodes.Contains(node)) return;
+
+      visitedNodes.Add(node);
+
+      foreach(Node neighbour in node.Neighbours)
+      {
+        dfsSearch(neighbour, visitedNodes);
+      }
     }
   }
 }

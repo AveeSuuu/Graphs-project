@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -47,13 +48,13 @@ namespace Graphs_project
     private void initPens()
     {
       blackPen = new Pen(Color.Black, 3);
-      greenPen = new Pen(Color.Green, 3);
+      greenPen = new Pen(Color.LightGreen, 3);
     }
 
     private void initBrushes()
     {
       whiteBrush = new SolidBrush(Color.White);
-      greenBrush = new SolidBrush(Color.Green);
+      greenBrush = new SolidBrush(Color.LightGreen);
       idBrush = new SolidBrush(Color.Black);
     }
 
@@ -112,32 +113,41 @@ namespace Graphs_project
       graphics.Clear(Color.White);
     }
 
-    public void drawAlgorithm(Queue<Node> algorithmSequence, Graph graph)
+    public void drawAlgorithm(Queue<Node> algorithmSequence, Graph graph, PictureBox picture)
     {
       {
-        Queue<Node> currentSequence = new Queue<Node>();
+        List<Node> currentSequence = new List<Node>();
 
         while (algorithmSequence.Count > 0)
         {
-          currentSequence.Enqueue(algorithmSequence.Dequeue());
+          currentSequence.Add(algorithmSequence.Dequeue());
           drawConnections(graph.Nodes);
           drawAlgorithmSequence(currentSequence);
           drawNodes(graph.Nodes);
+          Thread.Sleep(250);
+          picture.Refresh();
         }
       }
     }
 
-    private void drawAlgorithmSequence(Queue<Node> algorithmSequence)
+    private void drawAlgorithmSequence(List<Node> sequence)
     {
-      if (algorithmSequence.Count == 0) return;
+      if (sequence.Count < 2) return;
 
-      Node startNode = algorithmSequence.Dequeue();
+      int rangeLimit = sequence.Count - 1;
 
-      while(algorithmSequence.Count > 0)
+      int i = 0;
+      while (i < rangeLimit)
       {
-        Node targetNode = algorithmSequence.Dequeue();
-        graphics.DrawLine(greenPen, startNode.Position, targetNode.Position);
-        startNode = targetNode;
+        Node startNode = sequence[i];
+        Node targetNode = sequence[i+1];
+
+        if (startNode.Neighbours.Contains(targetNode))
+        {
+          graphics.DrawLine(greenPen, startNode.Position, targetNode.Position);
+        }
+
+        i++;
       }
     }
   }

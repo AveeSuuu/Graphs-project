@@ -60,6 +60,16 @@ namespace Graphs_project
       startNode.StartFlag = true;
     }
 
+    public static Node getStartNode(Graph graph)
+    {
+      foreach(Node node in graph.Nodes)
+      {
+        if (node.StartFlag) return node;
+      }
+
+      return null;
+    }
+
     private bool nodeNotFound(Node node)
     {
       return node == null ? true : false;

@@ -77,16 +77,20 @@ namespace Graphs_project
         return;
       }
 
-      Algorithm algorithm = GetAlgorithm();
+      Algorithm algorithm;
 
-      drawingKit.drawAlgorithm(algorithm.Steps, graph);
-    }
-
-    internal Algorithm GetAlgorithm()
-    {
-      if (BFSradioButton.Checked) return new BFS(graph);
-      if (DFSradioButton.Checked) return new DFS(graph);
-      return null;
-    }
+      if (BFSradioButton.Checked)
+      {
+        algorithm = new BFS(graph);
+        algorithm.search();
+        drawingKit.drawAlgorithm(algorithm.Steps, graph, drawingZone);
+      }
+      else
+      {
+        algorithm = new DFS(graph);
+        algorithm.search();
+        drawingKit.drawAlgorithm(algorithm.Steps, graph, drawingZone);
+      }
+    }  
   }
 }
