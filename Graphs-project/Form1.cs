@@ -77,6 +77,12 @@ namespace Graphs_project
         return;
       }
 
+      if (GraphOperations.getStartNode(graph) == null)
+      {
+        MessageBox.Show("No start node selected!");
+        return;
+      }
+
       Algorithm algorithm;
 
       if (BFSradioButton.Checked)
@@ -91,6 +97,6 @@ namespace Graphs_project
         algorithm.search();
         drawingKit.drawAlgorithm(algorithm.Steps, graph, drawingZone);
       }
-    }  
+    }
   }
 }

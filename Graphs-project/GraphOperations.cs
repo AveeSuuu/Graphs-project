@@ -48,7 +48,7 @@ namespace Graphs_project
 
     public void markNodeAsStart(Node startNode)
     {
-      foreach(Node node in graph.Nodes)
+      foreach (Node node in graph.Nodes)
       {
         if (node.StartFlag)
         {
@@ -62,7 +62,7 @@ namespace Graphs_project
 
     public static Node getStartNode(Graph graph)
     {
-      foreach(Node node in graph.Nodes)
+      foreach (Node node in graph.Nodes)
       {
         if (node.StartFlag) return node;
       }

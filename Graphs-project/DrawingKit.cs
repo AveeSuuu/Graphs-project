@@ -123,14 +123,14 @@ namespace Graphs_project
         drawConnections(graph.Nodes);
         drawAlgorithmSequence(steps);
         drawNodes(graph.Nodes);
-        Thread.Sleep(250);
         picture.Refresh();
+        Thread.Sleep(250);
       }
     }
 
     private void drawAlgorithmSequence(List<KeyValuePair<Node, Node>> steps)
     {
-      foreach(KeyValuePair<Node, Node> pair in steps)
+      foreach (KeyValuePair<Node, Node> pair in steps)
       {
         graphics.DrawLine(greenPen, pair.Key.Position, pair.Value.Position);
       }
