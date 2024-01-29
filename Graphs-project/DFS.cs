@@ -25,7 +25,9 @@ namespace Graphs_project
 
       foreach (Node neighbour in node.Neighbours)
       {
-        Steps.Add(new KeyValuePair<Node, Node>(node, neighbour));
+        if(visitedNodes.Contains(neighbour))
+          Steps.Add(new KeyValuePair<Node, Node>(node, neighbour));
+
         dfsSearch(neighbour, visitedNodes);
       }
     }
